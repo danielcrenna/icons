@@ -27,7 +27,7 @@ async Task GenerateIconComponentsAsync(ISet<string> typeSet, string sourceDir, s
 
         typeSet.Add(iconType);
 
-        var style = filename.Contains("-fill") ? "Fill" : "Outline";
+        var style = filename.Contains("-fill") ? "Solid" : "Outline";
 
         Console.WriteLine(iconType + style);
 
@@ -63,7 +63,7 @@ async Task GenerateIconTypes(HashSet<string> hashSet)
     }
 
     sb.AppendLine("}");
-    await File.WriteAllTextAsync(@"..\\..\\..\\..\\..\\blazor\\icons\\IconType.cs", sb.ToString());
+    await File.WriteAllTextAsync(@"..\\..\\..\\..\\..\\blazor\\twittericons\\IconType.cs", sb.ToString());
 }
 
 static string ConvertToTitleCase(string input)
