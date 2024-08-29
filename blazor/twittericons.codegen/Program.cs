@@ -13,17 +13,18 @@ async Task GenerateIconComponentsAsync(ISet<string> typeSet, string sourceDir, s
     {
         var filename = Path.GetFileNameWithoutExtension(filePath);
 
-        var iconType = ConvertToTitleCase(filename).Replace("Fill", "")
-            .Replace("0", "Zero")
-            .Replace("1", "One")
-            .Replace("2", "Two")
-            .Replace("3", "Three")
-            .Replace("4", "Four")
-            .Replace("5", "Five")
-            .Replace("6", "Six")
-            .Replace("7", "Seven")
-            .Replace("8", "Eight")
-            .Replace("9", "Nine")
+        var iconType = ConvertToTitleCase(filename)
+                .Replace("Fill", "")
+                .Replace("0", "Zero")
+                .Replace("1", "One")
+                .Replace("2", "Two")
+                .Replace("3", "Three")
+                .Replace("4", "Four")
+                .Replace("5", "Five")
+                .Replace("6", "Six")
+                .Replace("7", "Seven")
+                .Replace("8", "Eight")
+                .Replace("9", "Nine")
             ;
 
         typeSet.Add(iconType);
@@ -38,6 +39,7 @@ async Task GenerateIconComponentsAsync(ISet<string> typeSet, string sourceDir, s
 
         var svg = await File.ReadAllTextAsync(filePath);
         svg = svg.Replace("<svg xmlns=\"http://www.w3.org/2000/svg\"", "<svg xmlns=\"http://www.w3.org/2000/svg\" @attributes=\"@AdditionalAttributes\"");
+        svg = svg.Replace("width=\"16\" height=\"16\"", "");
         svg = RemoveClassAttribute().Replace(svg, "");
         sb.AppendLine(svg);
 
