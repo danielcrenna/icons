@@ -4,7 +4,9 @@
 @code
 {
     [Parameter] public IconType Type { get; set; } = IconFactory.DefaultIconType;
-    [Parameter] public IconStyle Style { get; set; } = IconStyle.Outline;
+
+    [Parameter] public IconStyle Style { get; set; } = IconFactory.DefaultIconStyle;
+
 
     private Type? _iconType;
 
