@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 
 var iconTypes = new HashSet<string>();
 await GenerateIconComponentsAsync(iconTypes, @"..\\..\\..\\..\\..\\icons", @"..\\..\\..\\..\\..\\blazor\\twittericons");
@@ -37,6 +38,7 @@ async Task GenerateIconComponentsAsync(ISet<string> typeSet, string sourceDir, s
 
         var svg = await File.ReadAllTextAsync(filePath);
         svg = svg.Replace("<svg xmlns=\"http://www.w3.org/2000/svg\"", "<svg xmlns=\"http://www.w3.org/2000/svg\" @attributes=\"@AdditionalAttributes\"");
+        svg = RemoveClassAttribute().Replace(svg, "");
         sb.AppendLine(svg);
 
         var component = sb.ToString();
@@ -72,4 +74,10 @@ static string ConvertToTitleCase(string input)
     var replaced = input.Replace('-', ' ');
     var titleCased = textInfo.ToTitleCase(replaced);
     return titleCased.Replace(" ", "");
+}
+
+partial class Program
+{
+    [GeneratedRegex(@"\s*class\s*=\s*""[^""]*""")]
+    private static partial Regex RemoveClassAttribute();
 }
