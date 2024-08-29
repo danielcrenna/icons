@@ -39,7 +39,7 @@ async Task GenerateIconComponentsAsync(ISet<string> typeSet, string sourceDir, s
 
         var svg = await File.ReadAllTextAsync(filePath);
         svg = svg.Replace("<svg xmlns=\"http://www.w3.org/2000/svg\"", "<svg xmlns=\"http://www.w3.org/2000/svg\" @attributes=\"@AdditionalAttributes\"");
-        svg = svg.Replace("width=\"16\" height=\"16\"", "");
+        svg = svg.Replace("width=\"16\" height=\"16\" ", "");
         svg = RemoveClassAttribute().Replace(svg, "");
         sb.AppendLine(svg);
 
