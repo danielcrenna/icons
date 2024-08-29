@@ -10,3 +10,9 @@
 
 # Release zip files
 bootstrap-icons-*.zip
+
+/blazor/.vs/
+/blazor/twittericons/bin
+/blazor/twittericons/obj
+/blazor/twittericons.codegen/bin/
+/blazor/twittericons.codegen/obj/

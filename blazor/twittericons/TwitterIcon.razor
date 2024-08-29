@@ -1,0 +1,23 @@
+@inherits Icon
+<DynamicComponent Type="@_iconType" Parameters="@AdditionalAttributes" />
+
+@code
+{
+    [Parameter] public IconType Type { get; set; } = IconType.QuestionCircle;
+    [Parameter] public IconStyle Style { get; set; } = IconStyle.Outline;
+
+    private Type? _iconType;
+
+    protected override Task OnParametersSetAsync()
+    {
+        _iconType = GetIconType();
+        return Task.CompletedTask;
+    }
+
+    public Type? GetIconType()
+    {
+        var typeName = $"{typeof(Icon).Namespace}.{Style}.{Type}Icon";
+        var type = System.Type.GetType(typeName, false, true)!;
+        return type ?? typeof(twittericons.Outline.QuestionCircleIcon);
+    }
+}
